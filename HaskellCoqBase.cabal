@@ -1,0 +1,29 @@
+name:                   HaskellCoqBase
+version:                0.1.0.0
+synopsis:               Haskell + Coq base project
+
+license:                MIT
+license-file:           LICENSE
+author:                 Michael Schmidt
+maintainer:             github@mschmidt.me
+build-type:             Custom
+stability:              experimental
+extra-source-files:     README.md
+cabal-version:          >=1.10
+
+executable HaskellCoqBase
+  main-is:              Main.hs
+  other-modules:        CoqMain
+                      , String
+  default-language:     Haskell2010
+  build-depends:        base >=4.10 && <4.11
+  hs-source-dirs:       src
+                      , extraction
+
+Custom-setup
+  setup-depends:        base >=4.10 && <4.11
+                      , directory
+                      , filepath
+                      , process
+                      , time
+                      , Cabal>=2.0 && < 2.1
