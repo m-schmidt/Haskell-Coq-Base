@@ -32,6 +32,11 @@ preClean' args flags = do
 coqDir = "coq"
 extDir = "extraction"
 
+-- Coq flags
+coqIncludes = ["-R", coqDir, "main." ++ coqDir]
+coqcFlags   = ["-noglob"]
+coqtopFlags = ["-batch", "-load-vernac-source"]
+
 
 -- Check whether a Coq extraction is needed
 extractionNeeded :: IO Bool
@@ -73,18 +78,16 @@ makeExtraction = do
   doExtraction
 
   where
-    compile f    = execute "coqc" $ includes ++ [f]
-    doExtraction = execute "coqtop" $ includes ++ ["-batch", "-load-vernac-source", extDir </> "extraction.v"]
-    includes     = ["-R", coqDir, "main." ++ coqDir]
+    compile f    = execute "coqc" $ coqIncludes ++ coqcFlags ++ [f]
+    doExtraction = execute "coqtop" $ coqIncludes ++ coqtopFlags ++ [extDir </> "extraction.v"]
 
 
--- Remove extracted Haskell source files and Coq .glob/.vo files
+-- Remove extracted Haskell source files and Coq .vo files
 removeExtration :: IO ()
 removeExtration = do
-  hs   <- findFiles extDir ".hs"
-  glob <- findFiles coqDir ".glob"
-  vo   <- findFiles coqDir ".vo"
-  mapM removeFile $ hs ++ glob ++ vo
+  hs <- findFiles extDir ".hs"
+  vo <- findFiles coqDir ".vo"
+  mapM removeFile $ hs ++ vo
   return ()
 
 
