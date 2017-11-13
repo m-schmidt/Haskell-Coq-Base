@@ -75,11 +75,11 @@ makeExtraction = do
   putStrLn "[Coq extraction]"
   coqSources <- findFiles coqDir ".v"
   mapM compile coqSources
-  doExtraction
+  extract $ extDir </> "extraction.v"
 
   where
-    compile f    = execute "coqc" $ coqIncludes ++ coqcFlags ++ [f]
-    doExtraction = execute "coqtop" $ coqIncludes ++ coqtopFlags ++ [extDir </> "extraction.v"]
+    compile f = execute "coqc" $ coqIncludes ++ coqcFlags ++ [f]
+    extract f = execute "coqtop" $ coqIncludes ++ coqtopFlags ++ [f]
 
 
 -- Remove extracted Haskell source files and Coq .vo files
@@ -94,7 +94,7 @@ removeExtration = do
 -- Execute an external command and check its result status
 execute :: FilePath -> [String] -> IO ()
 execute cmd args = do
-  putStrLn $ " - " ++ cmd ++ " " ++ last args
+  putStrLn $ "- Running " ++ cmd ++ " " ++ last args
   (_,_,_,p) <- createProcess (proc cmd args) { std_in=Inherit, std_out=Inherit, std_err=Inherit }
   r         <- waitForProcess p
   when (r /= ExitSuccess) $ exitWithError $ "command '" ++ cmd ++ "' failed with exit code " ++ show (code r) ++ "."
