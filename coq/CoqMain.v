@@ -19,13 +19,13 @@ Notation "'do' X <- A ; B" :=
 
 
 (* Example IO actions, implemented in Haskell *)
-Parameter putStr: string -> IO unit.
+Parameter putStrLn: string -> IO unit.
 Parameter getLine: unit -> IO string.
 
 
 (* Entry point of Coq code *)
 Definition main : IO unit :=
-  do _ <- putStr "What is your name?";
+  do _ <- putStrLn "What is your name?";
   do n <- getLine tt;
-  putStr ("Hello " ++ n ++ "!")
+  putStrLn ("Hello " ++ n ++ "!")
   .
