@@ -8,8 +8,8 @@ author:                 Michael Schmidt
 maintainer:             github@mschmidt.me
 build-type:             Custom
 stability:              experimental
-extra-source-files:     README.md
 cabal-version:          >=1.10
+extra-source-files:     coq/*.v
 
 executable HaskellCoqBase
   main-is:              Main.hs
