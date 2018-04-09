@@ -2,7 +2,7 @@ name:                   HaskellCoqBase
 version:                0.1.0.0
 synopsis:               Haskell + Coq base project
 
-license:                MIT
+license:                BSD3
 license-file:           LICENSE
 author:                 Michael Schmidt
 maintainer:             github@mschmidt.me
