@@ -16,14 +16,14 @@ executable HaskellCoqBase
   other-modules:        CoqMain
                       , String
   default-language:     Haskell2010
-  build-depends:        base >=4.10 && <4.11
+  build-depends:        base >=4.11 && <4.12
   hs-source-dirs:       src
                       , extraction
 
 Custom-setup
-  setup-depends:        base >=4.10 && <4.11
+  setup-depends:        base >=4.11 && <4.12
                       , directory
                       , filepath
                       , process
                       , time
-                      , Cabal >=2.0 && <2.1
+                      , Cabal >=2.2 && <2.3
